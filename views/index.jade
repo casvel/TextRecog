@@ -1,6 +1,8 @@
 extends layout
 
 block head
+	script.
+		var active_canvas = 0;
 	script(src='/javascripts/jcanvas.min.js')
 	script(src='/javascripts/canvas.js')
 	script(src='/javascripts/letters.js')
@@ -12,32 +14,45 @@ block content
 				a(class="navbar-brand" href="#") TextRecog
 			div(id="navbar" class="collapse navbar-collapse")
 				ul(class="nav navbar-nav")
-					li(id="homeTab" class="active")
-						a(href="#home") Home 
-					li(id="lettersTab")
-						a(href="#letters") Letters
-					li(id="segmentationTab")
-						a(href="#segmentation") Segmentation
-					li(id="testTab")
-						a(href="#test") Test
+					li.active
+						a(href="#home" data-toggle="tab") Home 
+					li
+						a(href="#letters" data-toggle="tab") Letters
+					li
+						a(href="#segmentation" data-toggle="tab") Segmentation
+					li
+						a(href="#test" data-toggle="tab") Test
 	
-	div(class="jumbotron")
-		div(class="container")
-			canvas(
-				id="canvas"
-				width="100"
-				height="100"
-			)
-				p Looks like your browser doesn't support the canvas API.
+	.container
+		.jumbotron
+			div(class="tab-conent")
+				div(class="tab-pane fade active in" id="home" )
+						p Help us please.
+						p Instructions:
+				div(class="tab-pane fade" id="letters")
+					h2#tLetter
 
-			a(
-				id="clearBtn"
-				href="#" 
-				class="btn btn-default"
-			) Clear
+					- for (var i = 0; i < 52; i++)
+							div(id="canvas-container"+i style="display:"+(i > 0 ? "none" : ""))
+								canvas(
+									id="canvas"+i
+									width="500"
+									height="500"
+								)
+									p Looks like your browser doesn't support the canvas API.
 
-			a(
-				id = "saveBtn"
-				href="#" 
-				class="btn btn-primary"
-			) Save
+								a(
+									id="clearBtn"+i
+									href="#" 
+									class="btn btn-default"
+								) Clear
+
+								a(
+									id = "saveBtn"+i
+									href="#" 
+									class="btn btn-primary"
+								) Save
+
+					div(id="pag_letters")
+				div(class="tabe-pane fade" id="segmentation")
+				div(class="tabe-pane fade" id="test")

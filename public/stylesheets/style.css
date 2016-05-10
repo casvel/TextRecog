@@ -12,3 +12,56 @@ canvas {
   max-width: 100%;
   outline: 2px solid #444;
 }
+
+.tab-pane:not(.active) {
+	display: none;
+}
+
+.pagination.bootpag > li:not(.disabled):not(.next) > a {
+	color: #244363;
+}
+
+.pagination.bootpag > li > a {
+	font-size: 15px;
+}
+
+.pagination > li.next:not(:hover):not(.disabled) > a {
+	background-color: #29abe0;
+	color: white;
+}
+
+.pagination > li.prev:not(:hover):not(.disabled) > a {
+	background-color: #29abe0;
+	color: white;
+}
+
+.pagination > li.last:not(:hover):not(.disabled) > a {
+	background-color: #29abe0;
+	color: white;
+}
+
+.pagination > li.first:not(:hover):not(.disabled) > a {
+	background-color: #29abe0;
+	color: white;
+}
+
+
+.pagination > li.next:hover:not(.disabled) > a {
+	background-color: #244363;
+	color: white;
+}
+
+.pagination > li.prev:hover:not(.disabled) > a {
+	background-color: #244363;
+	color: white;
+}
+
+.pagination > li.last:hover:not(.disabled) > a {
+	background-color: #244363;
+	color: white;
+}
+
+.pagination > li.first:hover:not(.disabled) > a {
+	background-color: #244363;
+	color: white;
+}
