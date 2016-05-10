@@ -1,10 +1,7 @@
 $(document).ready(function() 
 {
-
-  console.log("canvas: " + active_canvas);
-
   var all_canvas = $('canvas');
-  var offset = $("#"+all_canvas[1].id).offset();
+  var offset = $("#"+all_canvas[0].id).offset();
   var clearBtn = $('#clearBtn');
 
   var lineColor = '#333';
@@ -21,13 +18,12 @@ $(document).ready(function()
     y: 0
   };
 
-  fillWhite();
   initCanvas();
 
   /* To fill the canvas with white */
-  function fillWhite()
+  function fillWhite(i)
   {
-    var plain_canvas = document.getElementById("canvas"+active_canvas);
+    var plain_canvas = document.getElementById("canvas"+i);
     var ctx = plain_canvas.getContext('2d');
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, plain_canvas.width, plain_canvas.height);
@@ -36,7 +32,6 @@ $(document).ready(function()
   //jCanvas drawLine() method
   function paintLine(canvas, x1, y1, x2, y2, paintWidth, paintColor) 
   {
-    console.log(x1, y1, x2, y2);
     canvas.drawLine({
       strokeStyle: paintColor,
       strokeWidth: paintWidth,
@@ -58,6 +53,7 @@ $(document).ready(function()
   {
     for (var i = 0; i < 52; i++)
     {
+      fillWhite(i);
       canvas = $("#"+all_canvas[i].id);
       
       //On mousedown the painting functionality kicks in
@@ -80,22 +76,24 @@ $(document).ready(function()
 
         lastPos.x = pos.x;
         lastPos.y = pos.y;
-        pos.x = e.pageX - offset.left;
-        pos.y = e.pageY - offset.top;
+        pos.x = e.pageX - offset.left - 169;
+        pos.y = e.pageY - offset.top - 190;
 
         if (isMouseDown) 
         {
-          paintLine($("#"+this.id), lastPos.x, lastPos.y, pos.x, pos.y, lineWidthVal, lineColor);
+          paintLine($(this), lastPos.x, lastPos.y, pos.x, pos.y, lineWidthVal, lineColor);
         }
+      });
+
+      $("#clearBtn"+i).on('click', function()
+      {
+        $("#canvas"+i).clearCanvas();
+        fillWhite($(this).attr("id").slice(-1));
       });
     }
 
     //Clears all canvas surface
-    clearBtn.on('click', function()
-    {
-      canvas.clearCanvas();
-      fillWhite();
-    });
+    
   }
 
 });
