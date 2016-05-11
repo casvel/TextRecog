@@ -1,8 +1,6 @@
 $(document).ready(function()
 {
 
-	console.log("letters: " + active_canvas);
-
 	letters = new Array(52);
 	for (var i = 0; i < 52; i += 2)
 	{
