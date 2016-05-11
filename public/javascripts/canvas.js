@@ -76,8 +76,8 @@ $(document).ready(function()
 
         lastPos.x = pos.x;
         lastPos.y = pos.y;
-        pos.x = e.pageX - offset.left - 169;
-        pos.y = e.pageY - offset.top - 190;
+        pos.x = e.pageX - offset.left - 625;
+        pos.y = e.pageY - offset.top - 255;
 
         if (isMouseDown) 
         {
