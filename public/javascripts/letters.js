@@ -38,19 +38,21 @@ $(document).ready(function()
 	  $("#canvas-container"+active_canvas).css("display", "inline");
 	});
 
-	$("#saveBtn").click(function()
-	{
-		var canvas  = document.getElementById("canvas");
+	$('[id^=saveBtn]').click(function()
+	{	
+		var idnum = $(this).attr('id').substr(7);
+		var canvas  = document.getElementById("canvas"+idnum);						
 		var dataURL = canvas.toDataURL();
+		var letter = $("#tLetter").text();
 
 		$.ajax(
 		{
 		  type: "POST",
-		  url: "/save/letter/A",
+		  url: "/save/letter/"+letter,
 		  data: { image: dataURL }
 		}).done(function(res)
-		{
-			console.log("saved");
+		{			
+			$('.alert').show().delay(1500).fadeOut();
 		});
 	});
 

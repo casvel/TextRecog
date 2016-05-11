@@ -13,6 +13,17 @@ canvas {
   outline: 2px solid #444;
 }
 
+.jumbotron
+{
+	margin-top: 65px;
+	text-align: center;
+}
+
+.btn
+{
+	margin-right: 10px;
+}
+
 .tab-pane:not(.active) {
 	display: none;
 }
@@ -64,4 +75,12 @@ canvas {
 .pagination > li.first:hover:not(.disabled) > a {
 	background-color: #244363;
 	color: white;
+}
+
+.alert {
+	margin-top: 20px;
+    width: 20%;
+    text-align: center;
+    display: none;
+    float: right;
 }

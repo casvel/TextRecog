@@ -23,12 +23,19 @@ block content
 					li
 						a(href="#test" data-toggle="tab") Test
 	
+	div(class="alert alert-dismissible alert-success")
+		p <strong> Succesfully stored! </strong>
+	
 	.container
 		.jumbotron
 			div(class="tab-conent")
 				div(class="tab-pane fade active in" id="home" )
-						p Help us please.
+						p Help us, please.
 						p Instructions:
+						.line Draw with your mouse inside the canvas the corresponding letter. 
+						.line You can erase if you make a mistake, just click on "Clear". 
+						.line When you're done with that letter click on "Save" (you must save all letters) and move on to the next number to continue. <br><br>
+						p Thank you!
 				div(class="tab-pane fade" id="letters")
 					h2#tLetter
 
@@ -40,7 +47,7 @@ block content
 									height="100"
 								)
 									p Looks like your browser doesn't support the canvas API.
-
+								<br>
 								a(
 									id="clearBtn"+i
 									href="#" 
@@ -48,7 +55,7 @@ block content
 								) Clear
 
 								a(
-									id = "saveBtn"+i
+									id = "saveBtn"+i									
 									href="#" 
 									class="btn btn-primary"
 								) Save
