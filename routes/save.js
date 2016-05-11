@@ -19,14 +19,29 @@ router.route('/letter/:id')
 {
 	var base64Data = new Buffer(req.body.image.replace(/^data:image\/(png|gif|jpeg);base64,/,''), "base64");
 	var randomId = guid();
-	fs.writeFile(path.resolve(`./data/letters/${req.params.id}/${req.params.id}-`+ randomId +`.png`), base64Data, function(){}); 
-	res.end();
+	var folder = path.resolve(`./data/letters/${req.params.id}`);
+
+	fs.exists(folder, function(exists)
+	{
+		if (!exists)
+			fs.mkdirSync(folder);
+
+		fs.writeFile(path.resolve(folder+`/${req.params.id}`+randomId+".png"), base64Data, function(err)
+		{
+			if (err == null)
+				res.end("Success");
+			else
+				res.end("Error");
+		});
+	});
 });
 
 module.exports = router;
 
-function guid() {
-  function s4() {
+function guid() 
+{
+  function s4() 
+  {
     return Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)
       .substring(1);

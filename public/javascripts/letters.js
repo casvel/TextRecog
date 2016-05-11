@@ -31,15 +31,15 @@ $(document).ready(function()
 	}).on("page", function(event, num)
 	{
 	  $("#tLetter").html(String.fromCharCode(letters[num-1]));
-	  $("#canvas-container"+active_canvas).css("display", "none");
+	  $("#canvas-container-"+active_canvas).css("display", "none");
 	  active_canvas = num-1;
-	  $("#canvas-container"+active_canvas).css("display", "inline");
+	  $("#canvas-container-"+active_canvas).css("display", "inline");
 	});
 
 	$('[id^=saveBtn]').click(function()
 	{	
-		var idnum = $(this).attr('id').substr(7);
-		var canvas  = document.getElementById("canvas"+idnum);						
+		var idnum = $(this).attr('id').split('-')[1];
+		var canvas  = document.getElementById("canvas-"+idnum);						
 		var dataURL = canvas.toDataURL();
 		var letter = $("#tLetter").text();
 
@@ -50,7 +50,10 @@ $(document).ready(function()
 		  data: { image: dataURL }
 		}).done(function(res)
 		{			
-			$('.alert').show().delay(1500).fadeOut();
+			if (res == "Success")
+				$('#success-alert').show().delay(1500).fadeOut();
+			else
+				$('#fail-alert').show().delay(1500).fadeOut();
 		});
 	});
 

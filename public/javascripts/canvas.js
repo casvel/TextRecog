@@ -23,7 +23,7 @@ $(document).ready(function()
   /* To fill the canvas with white */
   function fillWhite(i)
   {
-    var plain_canvas = document.getElementById("canvas"+i);
+    var plain_canvas = document.getElementById("canvas-"+i);
     var ctx = plain_canvas.getContext('2d');
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, plain_canvas.width, plain_canvas.height);
@@ -76,8 +76,8 @@ $(document).ready(function()
 
         lastPos.x = pos.x;
         lastPos.y = pos.y;
-        pos.x = e.pageX - offset.left - 625;
-        pos.y = e.pageY - offset.top - 255;
+        pos.x = e.pageX - $(this).offset().left;
+        pos.y = e.pageY - $(this).offset().top;
 
         if (isMouseDown) 
         {
@@ -85,10 +85,10 @@ $(document).ready(function()
         }
       });
 
-      $("#clearBtn"+i).on('click', function()
+      $("#clearBtn-"+i).on('click', function()
       {
-        $("#canvas"+i).clearCanvas();
-        fillWhite($(this).attr("id").slice(-1));
+        $("#canvas-"+i).clearCanvas();
+        fillWhite($(this).attr("id").split('-')[1]);
       });
     }
 
