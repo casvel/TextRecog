@@ -91,8 +91,6 @@ $(document).ready(function()
         fillWhite($(this).attr("id").split('-')[1]);
       });
     }
-
-    //Clears all canvas surface
     
   }
 

@@ -12,11 +12,12 @@ $(document).ready(function()
 
 	function shuffleArray(array) 
 	{
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+    for (var i = array.length - 1; i > 0; i--) 
+    {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
     }
     return array;
 	}
@@ -25,7 +26,7 @@ $(document).ready(function()
 	$("#tLetter").html(String.fromCharCode(letters[0]));
 	$('#pag_letters').bootpag({
 	  total: 52,
-	  maxVisible: 10,
+	  maxVisible: 13,
 	  leaps: false,
 	  firstLastUse: true
 	}).on("page", function(event, num)

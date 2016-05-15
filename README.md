@@ -1,6 +1,6 @@
 # TextRecog
 
-A project for text recognition. It has the complete pipeline: data recollection, training and testing.
+A project for text recognition. It has the complete pipeline: data recollection, training character clasification and text segmentation, and testing.
 
 ## Description
 
