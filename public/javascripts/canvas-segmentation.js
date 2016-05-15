@@ -81,13 +81,14 @@ $(document).ready(function()
         $('#fail-alert').show().delay(1500).fadeOut();
     });
 
-    draw();  
-
-    if (rectOffset + canvasRes.width - 10 > canvasSeg.width)
+    if (rectOffset + canvasRes.width > canvasSeg.width)
     {
       $('.decSegBtn').attr( "disabled", true );
       $('#finish-alert').show().delay(1500).fadeOut();
+      return;
     }
+
+    draw();  
   });
 
   /*  
@@ -129,7 +130,7 @@ $(document).ready(function()
       return;
 
     canvas.clearCanvas();
-    fillWhite(canvas);
+    fillWhite(canvasSeg);
   });
 
   $("#startSegBtn").click(function()
@@ -141,6 +142,8 @@ $(document).ready(function()
     $(this).attr( "disabled", true );
     $("#clearBtn").attr( "disabled", true );
     $('.decSegBtn').attr( "disabled", false );
+    var position = $("#canvasSeg").position();
+    $("#canvasSel").css({position:"absolute", top:position.top, left:position.left});
     $("#canvasSel").show();
 
     draw(); 

@@ -42,72 +42,33 @@ block content
 						.line When you're done with that letter click on "Save" (you must save each letter) and move on to the next number to continue. <br><br>
 						p Thank you!
 				div(class="tab-pane fade" id="letters")
-					h2#tLetter
-
+					.row
+						h2#tLetter
 					- for (var i = 0; i < 52; i++)
-							div(id="canvas-container-"+i style="display:"+(i > 0 ? "none" : ""))
-								canvas(
-									id="canvas-"+i
-									width="100"
-									height="100"
-								)
-									p Looks like your browser doesn't support the canvas API.
-								<br>
-								a(
-									id="clearBtn-"+i
-									href="#" 
-									class="btn btn-default"
-								) Clear
-
-								a(
-									id = "saveBtn-"+i									
-									href="#" 
-									class="btn btn-primary"
-								) Save
-
-					div(id="pag_letters")
-				div(class="tabe-pane fade" id="segmentation")
-					h2#tText The quick brown fox 
-					canvas(
-							id="canvasSeg"
-							width="300"
-							height="100"
-							style="z-index:0"
-					)
-					canvas(
-							id="canvasSel"
-							width="300"
-							height="100"
-							style="display:none; z-index:1"
-					)
-					<br>	
-					canvas(
-							id="canvasRes"
-							width="100"
-							height="100"
-					)										
-					<br>
-					a(
-						id="clearBtn"
-						href="#" 
-						class="btn btn-default"
-					) Clear
-					a(
-						id="startSegBtn"
-						href="#" 
-						class="btn btn-primary"
-					) Start Segmentation
-					<br><br>
-					a(
-						id="yesSegBtn"
-						href="#" 
-						class="btn btn-primary decSegBtn"
-						disabled
-					) Yes
-					a(
-						id="noSegBtn"
-						href="#" 
-						class="btn btn-primary decSegBtn"
-						disabled
-					) No
+							.row
+								div(id="canvas-container-"+i style="display:"+(i > 0 ? "none" : ""))
+									.row
+										canvas(id="canvas-"+i width="100" height="100")
+											p Looks like your browser doesn't support the canvas API.
+									.row
+										a(id="clearBtn-"+i href="#" class="btn btn-default") Clear
+										a(id="saveBtn-"+i href="#" class="btn btn-primary") Save
+					.row
+						#pag_letters
+				div(class="tab-pane fade" id="segmentation")
+					.row
+						h2#tText The quick brown fox 
+					.row
+						canvas(id="canvasSeg" width="300" height="100" style="z-index:0;")
+						canvas(id="canvasSel" width="300" height="100" style="z-index:1; display:none")
+					.row
+						canvas(id="canvasRes" width="100" height="100")
+					.row
+						p(class="bs-component")
+							a(id="clearBtn" href="#" class="btn btn-default") Clear
+							a(id="startSegBtn" href="#" class="btn btn-primary") Start Segmentation
+					.row
+						p(class="bs-component")
+							a(id="yesSegBtn" href="#" class="btn btn-primary decSegBtn" disabled) Yes
+							a(id="noSegBtn" href="#" class="btn btn-primary decSegBtn" disabled) No
 				div(class="tabe-pane fade" id="test")
