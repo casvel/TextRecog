@@ -41,12 +41,15 @@ block content
 			div(class="tab-conent")
 				div(class="tab-pane fade active in" id="home" )
 						p Help us, please.
-						p Instructions:
-						.line Draw with your mouse inside the canvas the corresponding letter. 
-						.line You can erase if you make a mistake, just click on "Clear". 
-						.line When you're done with that letter click on "Save" (you must save each letter) and move on to the next number to continue. <br><br>
+						.line The purpose of this part of the project is to collect data for text recognition.
+						.line It's made-up by two modules. 
+						.line The purpose of the first one it's collect data for letter classification 
+						.line and the second one it's collect data for text segmentation into characters. 
+						.line Click on the tabs to start, in each section you'll find instructions. <br><br>
 						p Thank you!
 				div(class="tab-pane fade" id="letters")
+					p Instructions
+					.line Draw in the white box the letter that appears. Once you're done with that letter, click on "Save" <br>button and move on to the next number for another letter. Remember to save each letter. When you're <br>finish with all the letters, continue to section "Segmentation".
 					.row
 						h2#tLetter
 					- for (var i = 0; i < 52; i++)
@@ -61,6 +64,16 @@ block content
 					.row
 						#pag_letters
 				div(class="tab-pane fade" id="segmentation")
+					p Instructions
+					.line Draw in the white box the word that appears. Once you're done with the word, click on "Start segmentation" <br>button and help it classify the characters with "Yes" and "No" buttons. 
+					<br> Once the segmentation starts, a green rectangle will appear and whatever it's in it, it will be <br>copied into the small box below. 
+					<br><br> <strong> And what should I do? </strong>
+					<br> You'll see the content of the small box, and if you're able to draw a vertical line in the middle of <br>the box without touching any black pixel, then you should classify it as "Yes". <br>Otherwise classify it as "No". <br><br>
+					p Example					 	
+					img(src="../images/yes.png")
+					.line Yes					
+					img(src= "../images/no.png")
+					.line No
 					.row
 						h2#tText The quick brown fox 
 					.row

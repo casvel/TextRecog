@@ -1,6 +1,6 @@
 0 info it worked if it ends with ok
 1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'start' ]
-2 info using npm@3.8.9
+2 info using npm@3.9.0
 3 info using node@v6.1.0
 4 verbose run-script [ 'prestart', 'start', 'poststart' ]
 5 info lifecycle TextRecog@0.0.0~prestart: TextRecog@0.0.0
@@ -27,7 +27,7 @@
 17 error Linux 4.1.23-1-MANJARO
 18 error argv "/usr/bin/node" "/usr/bin/npm" "start"
 19 error node v6.1.0
-20 error npm  v3.8.9
+20 error npm  v3.9.0
 21 error code ELIFECYCLE
 22 error TextRecog@0.0.0 start: `node ./bin/www`
 22 error Exit status 1
