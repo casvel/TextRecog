@@ -84,3 +84,16 @@ canvas {
     display: none;
     float: right;
 }
+
+#tLetter{
+	font-family: 'Source Code Pro';
+    font-size: 55px;
+}
+
+#canvasSel{
+	position: absolute;
+    left: 326px;
+    top: 253px;
+    width: 700px;
+    height: 100px;
+}

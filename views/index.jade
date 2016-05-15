@@ -4,7 +4,8 @@ block head
 	script.
 		var active_canvas = 0;
 	script(src='/javascripts/jcanvas.min.js')
-	script(src='/javascripts/canvas.js')
+	script(src='/javascripts/canvas-letters.js')
+	script(src='/javascripts/canvas-segmentation.js')
 	script(src='/javascripts/letters.js')
 
 block content
@@ -64,4 +65,39 @@ block content
 
 					div(id="pag_letters")
 				div(class="tabe-pane fade" id="segmentation")
+					h2#tLetter The quick brown fox 
+					canvas(
+							id="canvasSeg"
+							width="700"
+							height="100"
+							z-index="0"
+					)
+					<br>	
+					canvas(
+							id="canvasRes"
+							width="70"
+							height="100"
+					)										
+					<br>
+					a(
+						id="clearBtn"
+						href="#" 
+						class="btn btn-default"
+					) Clear
+					a(
+						id="startSegBtn"
+						href="#" 
+						class="btn btn-primary"
+					) Start Segmentation
+					<br><br>
+					a(
+						id="yesSegBtn"
+						href="#" 
+						class="btn btn-primary decSegBtn"
+					) Yes
+					a(
+						id="noSegBtn"
+						href="#" 
+						class="btn btn-primary decSegBtn"
+					) No
 				div(class="tabe-pane fade" id="test")
