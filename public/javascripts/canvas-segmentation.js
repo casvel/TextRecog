@@ -1,9 +1,11 @@
 $(document).ready(function() 
 {
-  var canvas = $('canvasSeg');
-  var offset = $("#"+canvas.id).offset();
-  var clearBtn = $('#clearBtn');
-  var x;
+  var canvas = $("#canvasSeg");
+  var canvasSeg = document.getElementById("canvasSeg");
+  var canvasSel = document.getElementById("canvasSel");
+  var canvasRes = document.getElementById("canvasRes");
+
+  var rectOffset = 0;
   var lineColor = '#333';
   var lineWidthVal = 4;
 
@@ -18,15 +20,14 @@ $(document).ready(function()
     y: 0
   };
 
-  initCanvas();
+  fillWhite(canvasSeg);
 
   /* To fill the canvas with white */
-  function fillWhite()
+  function fillWhite(canvas)
   {
-    var plain_canvas = document.getElementById("canvasSeg");
-    var ctx = plain_canvas.getContext('2d');
+    var ctx = canvas.getContext("2d");
     ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, plain_canvas.width, plain_canvas.height);    
+    ctx.fillRect(0, 0, canvas.width, canvas.height);    
   }
 
   //jCanvas drawLine() method
@@ -46,55 +47,31 @@ $(document).ready(function()
   }
 
   //Draws selection rectangle for segmentation
-  function draw(x1)
+  function draw()
   {
-    var canvas = document.getElementById("canvasSeg");
-    var ctx = canvas.getContext("2d");   
-    var canvas1 = document.getElementById("canvasSel");    
-    var ctx1 = canvas1.getContext("2d");          
-    var canvas2 = document.getElementById("canvasRes");
-    var ctx2 = canvas2.getContext("2d");        
-    //Rectangle properties 
-    var handle = {
-      color: 'rgba(0, 255, 0, 0.2)',
-      dim: { w: 35, h: canvas1.height },
-      pos: { x: 0, y: 0 }
-    };
+    var ctx_canvasSel = canvasSel.getContext("2d");   
+    var ctx_canvasRes = canvasRes.getContext("2d");        
+    
+    ctx_canvasSel.clearRect(0, 0, canvasSel.width, canvasSel.height);
+    ctx_canvasSel.fillStyle = "rgba(0, 255, 0, 0.2)";
+    ctx_canvasSel.fillRect(rectOffset, 0, canvasRes.width, canvasRes.height); 
 
-    ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
-    ctx1.fillStyle = handle.color;
-    ctx1.fillRect(x1+handle.pos.x, handle.pos.y, handle.dim.w, handle.dim.h);      
-    ctx2.drawImage(canvas,x1+handle.pos.x,handle.pos.y,70,150,0,0,70,150);
-    x = x1+handle.pos.x+14;
-  }
-
-  //Initialize and adds canvas for segmentation
-  function startSegmentation()
-  {
-    var canvas1 = document.createElement('canvas');
-    var ctx1 = canvas1.getContext("2d");          
-    canvas1.setAttribute("id", "canvasSel");
-    document.getElementById("segmentation").appendChild(canvas1);   
-
-    draw(0);      
+    ctx_canvasRes.drawImage(canvasSeg, rectOffset, 0, canvasRes.width, canvasRes.height, 0, 0, canvasRes.width, canvasRes.height);
+    rectOffset += 10;
   }
 
   $('.decSegBtn').click(function()
   {
-    var canvas = document.getElementById("canvasRes");
-    var ctx = canvas.getContext("2d");  
-    var dataURL = canvas.toDataURL();  
+    if ($(this).attr("disabled") === "disabled")
+      return;
+ 
+    var dataURL = canvasRes.toDataURL();  
     var id = this.id;    
-
-    if(id.match("^yes"))
-      var URL = "/save/segmentation/yes";
-    else
-      var URL = "/save/segmentation/no";
 
     $.ajax(
     {
       type: "POST",
-      url: URL,                              
+      url: "/save/segmentation/" + (id.match("^yes") ? "yes" : "no"),                              
       data: { image: dataURL }
     }).done(function(res)
     {     
@@ -104,61 +81,69 @@ $(document).ready(function()
         $('#fail-alert').show().delay(1500).fadeOut();
     });
 
-    draw(x);  
+    draw();  
+
+    if (rectOffset + canvasRes.width - 10 > canvasSeg.width)
+    {
+      $('.decSegBtn').attr( "disabled", true );
+      $('#finish-alert').show().delay(1500).fadeOut();
+    }
   });
 
   /*  
-   ** PAINTING FUNCTIONALITY **
-   */
-
-  function initCanvas()
+  ** PAINTING FUNCTIONALITY **
+  */
+  
+  //On mousedown the painting functionality kicks in
+  canvas.on('mousedown', function(e) 
   {
-      fillWhite();
-      canvas = $("#canvasSeg");
-      
-      //On mousedown the painting functionality kicks in
-      canvas.on('mousedown', function(e) 
-      {
-        isMouseDown = true;
-      });
+    isMouseDown = true;
+  });
 
-      //On mouseup the painting functionality stops
-      canvas.on('mouseup', function() 
-      {
-        isMouseDown = false;
-        return;
-      });
+  //On mouseup the painting functionality stops
+  canvas.on('mouseup', function() 
+  {
+    isMouseDown = false;
+    return;
+  });
 
-      //On mousemove store the mouse coordinates and 
-      //use jCanvas drawLine() method
-      canvas.on('mousemove', function(e) 
-      {
+  //On mousemove store the mouse coordinates and 
+  //use jCanvas drawLine() method
+  canvas.on('mousemove', function(e) 
+  {
 
-        lastPos.x = pos.x;
-        lastPos.y = pos.y;
-        pos.x = e.pageX - $(this).offset().left;
-        pos.y = e.pageY - $(this).offset().top;
+    lastPos.x = pos.x;
+    lastPos.y = pos.y;
+    pos.x = e.pageX - $(this).offset().left;
+    pos.y = e.pageY - $(this).offset().top;
 
-        if (isMouseDown) 
-        {
-          paintLine($(this), lastPos.x, lastPos.y, pos.x, pos.y, lineWidthVal, lineColor);
-        }
-      });
+    if (isMouseDown) 
+    {
+      paintLine($(this), lastPos.x, lastPos.y, pos.x, pos.y, lineWidthVal, lineColor);
+    }
+  });
 
-      $("#clearBtn").on('click', function()
-      {
-        $("#canvasSeg").clearCanvas();
-        $("#canvasSel").clearCanvas();
-        fillWhite();
-      });
-    
-      $("#startSegBtn").on('click', function()
-      {
-        startSegmentation();
-      });
+  $("#clearBtn").click(function()
+  {
+    if ($(this).attr("disabled") === "disabled")
+      return;
 
-    //Clears canvas surface
-    
-  }
+    canvas.clearCanvas();
+    fillWhite(canvas);
+  });
+
+  $("#startSegBtn").click(function()
+  {
+    if ($(this).attr("disabled") === "disabled")
+      return;
+
+
+    $(this).attr( "disabled", true );
+    $("#clearBtn").attr( "disabled", true );
+    $('.decSegBtn').attr( "disabled", false );
+    $("#canvasSel").show();
+
+    draw(); 
+  });
 
 });

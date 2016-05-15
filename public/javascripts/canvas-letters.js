@@ -1,8 +1,6 @@
 $(document).ready(function() 
 {
   var all_canvas = $('canvas');
-  var offset = $("#"+all_canvas[0].id).offset();
-  var clearBtn = $('#clearBtn');
 
   var lineColor = '#333';
   var lineWidthVal = 4;
@@ -54,7 +52,7 @@ $(document).ready(function()
     for (var i = 0; i < 52; i++)
     {
       fillWhite(i);
-      canvas = $("#"+all_canvas[i].id);
+      canvas = $(all_canvas[i]);
       
       //On mousedown the painting functionality kicks in
       canvas.on('mousedown', function(e) 

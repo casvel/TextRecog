@@ -28,6 +28,8 @@ block content
 		p <strong> Succesfully stored! </strong>
 	div(id="fail-alert" class="alert alert-dismissible alert-danger")
 		p <strong> Error saving image! </strong>
+	div(id="finish-alert" class="alert alert-dismissible alert-success")
+		p <strong> Segmentation finished. Thank you! </strong>
 	
 	.container
 		.jumbotron
@@ -65,17 +67,23 @@ block content
 
 					div(id="pag_letters")
 				div(class="tabe-pane fade" id="segmentation")
-					h2#tLetter The quick brown fox 
+					h2#tText The quick brown fox 
 					canvas(
 							id="canvasSeg"
-							width="700"
+							width="300"
 							height="100"
-							z-index="0"
+							style="z-index:0"
+					)
+					canvas(
+							id="canvasSel"
+							width="300"
+							height="100"
+							style="display:none; z-index:1"
 					)
 					<br>	
 					canvas(
 							id="canvasRes"
-							width="70"
+							width="100"
 							height="100"
 					)										
 					<br>
@@ -94,10 +102,12 @@ block content
 						id="yesSegBtn"
 						href="#" 
 						class="btn btn-primary decSegBtn"
+						disabled
 					) Yes
 					a(
 						id="noSegBtn"
 						href="#" 
 						class="btn btn-primary decSegBtn"
+						disabled
 					) No
 				div(class="tabe-pane fade" id="test")
