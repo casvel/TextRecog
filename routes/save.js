@@ -5,6 +5,8 @@ var fs   = require("fs");
 
 var router = express.Router();
 
+router.use(bodyParser.json());
+
 function guid() 
 {
   function s4() 
@@ -16,8 +18,6 @@ function guid()
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
     s4() + '-' + s4() + s4() + s4();
 }
-
-router.use(bodyParser.json());
 
 router.route('/letter/:id')
 
@@ -48,8 +48,6 @@ router.route('/letter/:id')
 	});
 });
 
-module.exports = router;
-
 router.route('/segmentation/:id')
 
 .all(function(req, res, next) 
@@ -78,3 +76,5 @@ router.route('/segmentation/:id')
 		});
 	});
 });
+
+module.exports = router;

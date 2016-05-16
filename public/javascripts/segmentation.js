@@ -1,6 +1,5 @@
 $(document).ready(function() 
 {
-  var canvas = $("#canvasSeg");
   var canvasSeg = document.getElementById("canvasSeg");
   var canvasSel = document.getElementById("canvasSel");
   var canvasRes = document.getElementById("canvasRes");
@@ -20,42 +19,20 @@ $(document).ready(function()
     y: 0
   };
 
-  fillWhite(canvasSeg);
-
-  /* To fill the canvas with white */
-  function fillWhite(canvas)
-  {
-    var ctx = canvas.getContext("2d");
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);    
-  }
-
-  //jCanvas drawLine() method
-  function paintLine(canvas, x1, y1, x2, y2, paintWidth, paintColor) 
-  {
-    canvas.drawLine({
-      strokeStyle: paintColor,
-      strokeWidth: paintWidth,
-      rounded: true,
-      strokeJoin: 'round',
-      strokeCap: 'round',
-      x1: x1,
-      y1: y1,
-      x2: x2,
-      y2: y2
-    });
-  }
+  $("#canvasSeg").sketch();
 
   //Draws selection rectangle for segmentation
-  function draw()
+  function moveSelection()
   {
     var ctx_canvasSel = canvasSel.getContext("2d");   
     var ctx_canvasRes = canvasRes.getContext("2d");        
     
+
     ctx_canvasSel.clearRect(0, 0, canvasSel.width, canvasSel.height);
     ctx_canvasSel.fillStyle = "rgba(0, 255, 0, 0.2)";
     ctx_canvasSel.fillRect(rectOffset, 0, canvasRes.width, canvasRes.height); 
 
+    ctx_canvasRes.clearRect(0, 0, canvasRes.width, canvasRes.height);
     ctx_canvasRes.drawImage(canvasSeg, rectOffset, 0, canvasRes.width, canvasRes.height, 0, 0, canvasRes.width, canvasRes.height);
     rectOffset += 10;
   }
@@ -88,49 +65,18 @@ $(document).ready(function()
       return;
     }
 
-    draw();  
+    moveSelection();  
   });
 
-  /*  
-  ** PAINTING FUNCTIONALITY **
-  */
-  
-  //On mousedown the painting functionality kicks in
-  canvas.on('mousedown', function(e) 
-  {
-    isMouseDown = true;
-  });
 
-  //On mouseup the painting functionality stops
-  canvas.on('mouseup', function() 
-  {
-    isMouseDown = false;
-    return;
-  });
-
-  //On mousemove store the mouse coordinates and 
-  //use jCanvas drawLine() method
-  canvas.on('mousemove', function(e) 
-  {
-
-    lastPos.x = pos.x;
-    lastPos.y = pos.y;
-    pos.x = e.pageX - $(this).offset().left;
-    pos.y = e.pageY - $(this).offset().top;
-
-    if (isMouseDown) 
-    {
-      paintLine($(this), lastPos.x, lastPos.y, pos.x, pos.y, lineWidthVal, lineColor);
-    }
-  });
-
-  $("#clearBtn").click(function()
+  $("#clearSegBtn").click(function()
   {
     if ($(this).attr("disabled") === "disabled")
       return;
 
-    canvas.clearCanvas();
-    fillWhite(canvasSeg);
+    var ctx = canvasSeg.getContext('2d');
+    $("#canvasSeg").sketch().actions = [];
+    ctx.clearRect(0, 0, canvasSeg.width, canvasSeg.height);
   });
 
   $("#startSegBtn").click(function()
@@ -146,7 +92,7 @@ $(document).ready(function()
     $("#canvasSel").css({position:"absolute", top:position.top, left:position.left});
     $("#canvasSel").show();
 
-    draw(); 
+    moveSelection(); 
   });
 
 });

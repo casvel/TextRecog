@@ -22,6 +22,7 @@ $(document).ready(function()
     return array;
 	}
 
+	$('#canvas-'+active_canvas).sketch();
 
 	$("#tLetter").html(String.fromCharCode(letters[0]));
 	$('#pag_letters').bootpag({
@@ -32,15 +33,23 @@ $(document).ready(function()
 	}).on("page", function(event, num)
 	{
 	  $("#tLetter").html(String.fromCharCode(letters[num-1]));
-	  $("#canvas-container-"+active_canvas).css("display", "none");
+	  $("#canvas-"+active_canvas).css("display", "none");
 	  active_canvas = num-1;
-	  $("#canvas-container-"+active_canvas).css("display", "inline");
+	  $("#canvas-"+active_canvas).css("display", "inline");
+	  $('#canvas-'+active_canvas).sketch();
 	});
 
-	$('[id^=saveBtn]').click(function()
+	$("#clearBtn").click(function()
+	{
+		var canvas = document.getElementById("canvas-"+active_canvas);
+    var ctx = canvas.getContext('2d');
+    $('#canvas-'+active_canvas).sketch().actions = [];
+	  ctx.clearRect(0, 0, canvas.width, canvas.height);
+	});
+
+	$("#saveBtn").click(function()
 	{	
-		var idnum = $(this).attr('id').split('-')[1];
-		var canvas  = document.getElementById("canvas-"+idnum);						
+		var canvas  = document.getElementById("canvas-"+active_canvas);						
 		var dataURL = canvas.toDataURL();
 		var letter = $("#tLetter").text();
 
