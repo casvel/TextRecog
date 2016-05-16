@@ -29,9 +29,9 @@ $(document).ready(function()
     'real', 'free',
     'drive', 'music',
     'moon', 'hello',
-    'light', 'bed',
+    'light', 'birds',
     'beach', 'muse',
-    'ocean', 'sun'
+    'ocean', 'sunny'
   ]
   
   word.innerHTML = words[wordNum];
@@ -139,7 +139,7 @@ $(document).ready(function()
     }
   });
 
-  $("#clearBtn").click(function()
+  $("#clearSegBtn").click(function()
   {
     if ($(this).attr("disabled") === "disabled")
       return;
@@ -155,7 +155,7 @@ $(document).ready(function()
 
 
     $(this).attr( "disabled", true );
-    $("#clearBtn").attr( "disabled", true );
+    $("#clearSegBtn").attr( "disabled", true );
     $('.decSegBtn').attr( "disabled", false );
     var position = $("#canvasSeg").position();
     $("#canvasSel").css({position:"absolute", top:position.top, left:position.left});
