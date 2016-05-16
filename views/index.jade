@@ -3,8 +3,9 @@ extends layout
 block head
 	script.
 		var active_canvas = 0;
-	script(src='/javascripts/sketch.min.js')
-	script(src='/javascripts/segmentation.js')
+	script(src='/javascripts/jcanvas.min.js')
+	script(src='/javascripts/canvas-letters.js')
+	script(src='/javascripts/canvas-segmentation.js')
 	script(src='/javascripts/letters.js')
 
 block content
@@ -39,12 +40,13 @@ block content
 		.jumbotron
 			div(class="tab-conent")
 				div(class="tab-pane fade active in" id="home" )
-						h2 Help us, please.
-						p The purpose of this part of the project is to collect data for text recognition.
-						p It's made-up by two modules. 
-						p The purpose of the first one it's collect data for letter classification and the second one it's collect data for text segmentation into characters. 
-						p Click on the tabs to start, in each section you'll find instructions. <br><br>
-						h2 Thank you!
+						p Help us, please.
+						.line The purpose of this part of the project is to collect data for text recognition.
+						.line It's made-up by two modules. 
+						.line The purpose of the first one it's collect data for letter classification 
+						.line and the second one it's collect data for text segmentation into characters. 
+						.line Click on the tabs to start, in each section you'll find instructions. <br><br>
+						p Thank you!
 				div(class="tab-pane fade" id="letters")
 					p Instructions
 					.line Draw in the white box the letter that appears. Once you're done with that letter, click on "Save" <br>button and move on to the next number for another letter. Remember to save each letter. When you're <br>finish with all the letters, continue to section "Segmentation".
@@ -52,11 +54,13 @@ block content
 						h2#tLetter
 					- for (var i = 0; i < 52; i++)
 							.row
-								canvas(id="canvas-"+i width="100" height="100" style="display:"+(i > 0 ? "none" : ""))
-									p Looks like your browser doesn't support the canvas API.
-						.row
-							a(id="clearBtn" href="#" class="btn btn-default") Clear
-							a(id="saveBtn" href="#" class="btn btn-primary") Save
+								div(id="canvas-container-"+i style="display:"+(i > 0 ? "none" : ""))
+									.row
+										canvas(id="canvas-"+i width="100" height="100")
+											p Looks like your browser doesn't support the canvas API.
+									.row
+										a(id="clearBtn-"+i href="#" class="btn btn-default") Clear
+										a(id="saveBtn-"+i href="#" class="btn btn-primary") Save
 					.row
 						#pag_letters
 				div(class="tab-pane fade" id="segmentation")
@@ -66,24 +70,23 @@ block content
 					<br><br> <strong> And what should I do? </strong>
 					<br> You'll see the content of the small box, and if you're able to draw a vertical line in the middle of <br>the box without touching any black pixel, then you should classify it as "Yes". <br>Otherwise classify it as "No". <br><br>
 					p Example					 	
-					img(src="../images/yes.png" style="border:1px solid black")
-					p Yes 
-					img(src= "../images/no.png" style="border:1px solid black")
-					p No
+					img(src="../images/yes.png")
+					.line Yes					
+					img(src= "../images/no.png")
+					.line No
 					.row
 						h2#tText The quick brown fox 
 					.row
-						canvas(id="canvasSeg" name="seg" width="300" height="100" style="z-index:0;")
+						canvas(id="canvasSeg" width="300" height="100" style="z-index:0;")
 						canvas(id="canvasSel" width="300" height="100" style="z-index:1; display:none")
 					.row
 						canvas(id="canvasRes" width="100" height="100")
 					.row
 						p(class="bs-component")
-							a(id="clearSegBtn" href="#seg" class="btn btn-default") Clear
-							a(id="startSegBtn" href="#seg" class="btn btn-primary") Start Segmentation
+							a(id="clearBtn" href="#" class="btn btn-default") Clear
+							a(id="startSegBtn" href="#" class="btn btn-primary") Start Segmentation
 					.row
 						p(class="bs-component")
-							a(id="yesSegBtn" href="#seg" class="btn btn-primary decSegBtn" disabled) Yes
-							a(id="noSegBtn" href="#seg" class="btn btn-primary decSegBtn" disabled) No
+							a(id="yesSegBtn" href="#" class="btn btn-primary decSegBtn" disabled) Yes
+							a(id="noSegBtn" href="#" class="btn btn-primary decSegBtn" disabled) No
 				div(class="tabe-pane fade" id="test")
-					p On construction...
