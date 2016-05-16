@@ -4,10 +4,13 @@ $(document).ready(function()
   var canvasSeg = document.getElementById("canvasSeg");
   var canvasSel = document.getElementById("canvasSel");
   var canvasRes = document.getElementById("canvasRes");
+  var word = document.getElementById("tText");
 
   var rectOffset = 0;
   var lineColor = '#333';
   var lineWidthVal = 4;
+  var wordNum = Math.floor((Math.random() * 20) + 1);
+  var wordStr = wordNum.toString();
 
   var isMouseDown = false;
 
@@ -19,7 +22,20 @@ $(document).ready(function()
     x: 0,
     y: 0
   };
-
+  var words = {
+    '1' : 'house', '2' : 'life',
+    '3' : 'girl', '4' : 'world',
+    '5' : 'dance', '6' : 'secret',
+    '7' : 'star', '8' : 'sailor',
+    '9' : 'real', '10' : 'free',
+    '11' : 'drive', '12' : 'music',
+    '13' : 'moon', '14' : 'hello',
+    '15' : 'light', '16' : 'bed',
+    '17' : 'beach', '18' : 'muse',
+    '19' : 'ocean', '20' : 'sun',
+  };
+  
+  word.innerHTML = words[wordStr];
   fillWhite(canvasSeg);
 
   /* To fill the canvas with white */
@@ -47,7 +63,7 @@ $(document).ready(function()
   }
 
   //Draws selection rectangle for segmentation
-  function moveSelection()
+  function draw()
   {
     var ctx_canvasSel = canvasSel.getContext("2d");   
     var ctx_canvasRes = canvasRes.getContext("2d");        
@@ -88,7 +104,7 @@ $(document).ready(function()
       return;
     }
 
-    moveSelection();  
+    draw();  
   });
 
   /*  
@@ -124,7 +140,7 @@ $(document).ready(function()
     }
   });
 
-  $("#clearSegBtn").click(function()
+  $("#clearBtn").click(function()
   {
     if ($(this).attr("disabled") === "disabled")
       return;
@@ -140,13 +156,13 @@ $(document).ready(function()
 
 
     $(this).attr( "disabled", true );
-    $("#clearSegBtn").attr( "disabled", true );
+    $("#clearBtn").attr( "disabled", true );
     $('.decSegBtn').attr( "disabled", false );
     var position = $("#canvasSeg").position();
     $("#canvasSel").css({position:"absolute", top:position.top, left:position.left});
     $("#canvasSel").show();
 
-    moveSelection(); 
+    draw(); 
   });
 
 });
