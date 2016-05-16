@@ -1,7 +1,5 @@
 $(document).ready(function() 
 {
-  var all_canvas = $('canvas');
-
   var lineColor = '#333';
   var lineWidthVal = 4;
 
@@ -49,10 +47,10 @@ $(document).ready(function()
 
   function initCanvas()
   {
-    for (var i = 0; i < 52; i++)
+    for (var i = 0; i < 26; i++)
     {
       fillWhite(i);
-      canvas = $(all_canvas[i]);
+      canvas = $("#canvas-"+i);
       
       //On mousedown the painting functionality kicks in
       canvas.on('mousedown', function(e) 

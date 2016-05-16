@@ -1,13 +1,9 @@
 $(document).ready(function()
 {
 
-	letters = new Array(52);
-	for (var i = 0; i < 52; i += 2)
-	{
-		var x = i/2;
-		letters[i]   = x+65;
-		letters[i+1] = x+97; 
-	}
+	letters = new Array(26);
+	for (var i = 0; i < 26; i++)
+		letters[i] = i+97; 
 	letters = shuffleArray(letters);
 
 	function shuffleArray(array) 
