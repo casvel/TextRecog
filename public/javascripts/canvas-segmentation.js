@@ -29,9 +29,9 @@ $(document).ready(function()
     'real', 'free',
     'drive', 'music',
     'moon', 'hello',
-    'light', 'bed',
+    'light', 'birds',
     'beach', 'muse',
-    'ocean', 'sun'
+    'ocean', 'sunny'
   ]
   
   word.innerHTML = words[wordNum];
