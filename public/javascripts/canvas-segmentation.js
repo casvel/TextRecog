@@ -9,8 +9,8 @@ $(document).ready(function()
   var rectOffset = 0;
   var lineColor = '#333';
   var lineWidthVal = 4;
-  var wordNum = Math.floor((Math.random() * 20) + 1);
-  var wordStr = wordNum.toString();
+  var wordNum = Math.floor((Math.random() * 20) + 0);
+
 
   var isMouseDown = false;
 
@@ -22,20 +22,19 @@ $(document).ready(function()
     x: 0,
     y: 0
   };
-  var words = {
-    '1' : 'house', '2' : 'life',
-    '3' : 'girl', '4' : 'world',
-    '5' : 'dance', '6' : 'secret',
-    '7' : 'star', '8' : 'sailor',
-    '9' : 'real', '10' : 'free',
-    '11' : 'drive', '12' : 'music',
-    '13' : 'moon', '14' : 'hello',
-    '15' : 'light', '16' : 'bed',
-    '17' : 'beach', '18' : 'muse',
-    '19' : 'ocean', '20' : 'sun',
-  };
+  var words = ['house', 'life',
+    'girl', 'world',
+    'dance', 'secret',
+    'star', 'sailor',
+    'real', 'free',
+    'drive', 'music',
+    'moon', 'hello',
+    'light', 'bed',
+    'beach', 'muse',
+    'ocean', 'sun'
+  ]
   
-  word.innerHTML = words[wordStr];
+  word.innerHTML = words[wordNum];
   fillWhite(canvasSeg);
 
   /* To fill the canvas with white */
@@ -63,7 +62,7 @@ $(document).ready(function()
   }
 
   //Draws selection rectangle for segmentation
-  function draw()
+  function moveSelection()
   {
     var ctx_canvasSel = canvasSel.getContext("2d");   
     var ctx_canvasRes = canvasRes.getContext("2d");        
@@ -104,7 +103,7 @@ $(document).ready(function()
       return;
     }
 
-    draw();  
+    moveSelection();  
   });
 
   /*  
@@ -162,7 +161,7 @@ $(document).ready(function()
     $("#canvasSel").css({position:"absolute", top:position.top, left:position.left});
     $("#canvasSel").show();
 
-    draw(); 
+    moveSelection(); 
   });
 
 });
