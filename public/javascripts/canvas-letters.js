@@ -71,7 +71,6 @@ $(document).ready(function()
       //use jCanvas drawLine() method
       canvas.on('mousemove', function(e) 
       {
-
         lastPos.x = pos.x;
         lastPos.y = pos.y;
         pos.x = e.pageX - $(this).offset().left;
