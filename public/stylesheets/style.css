@@ -82,7 +82,8 @@ canvas {
     width: 20%;
     text-align: center;
     display: none;
-    float: right;
+    right: 8px;
+    position: fixed;
 }
 
 #tLetter{
