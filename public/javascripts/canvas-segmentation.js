@@ -4,10 +4,13 @@ $(document).ready(function()
   var canvasSeg = document.getElementById("canvasSeg");
   var canvasSel = document.getElementById("canvasSel");
   var canvasRes = document.getElementById("canvasRes");
+  var word = document.getElementById("tText");
 
   var rectOffset = 0;
   var lineColor = '#333';
   var lineWidthVal = 4;
+  var wordNum = Math.floor((Math.random() * 20) + 0);
+
 
   var isMouseDown = false;
 
@@ -19,7 +22,19 @@ $(document).ready(function()
     x: 0,
     y: 0
   };
-
+  var words = ['house', 'life',
+    'girl', 'world',
+    'dance', 'secret',
+    'star', 'sailor',
+    'real', 'free',
+    'drive', 'music',
+    'moon', 'hello',
+    'light', 'bed',
+    'beach', 'muse',
+    'ocean', 'sun'
+  ]
+  
+  word.innerHTML = words[wordNum];
   fillWhite(canvasSeg);
 
   /* To fill the canvas with white */
@@ -124,7 +139,7 @@ $(document).ready(function()
     }
   });
 
-  $("#clearSegBtn").click(function()
+  $("#clearBtn").click(function()
   {
     if ($(this).attr("disabled") === "disabled")
       return;
@@ -140,7 +155,7 @@ $(document).ready(function()
 
 
     $(this).attr( "disabled", true );
-    $("#clearSegBtn").attr( "disabled", true );
+    $("#clearBtn").attr( "disabled", true );
     $('.decSegBtn').attr( "disabled", false );
     var position = $("#canvasSeg").position();
     $("#canvasSel").css({position:"absolute", top:position.top, left:position.left});
