@@ -82,14 +82,13 @@ $(document).ready(function()
           paintLine($(this), lastPos.x, lastPos.y, pos.x, pos.y, lineWidthVal, lineColor);
         }
       });
-
-      $("#clearBtn-"+i).on('click', function()
-      {
-        $("#canvas-"+i).clearCanvas();
-        fillWhite($(this).attr("id").split('-')[1]);
-      });
     }
-    
   }
+
+  $("#clearBtn").on('click', function()
+  {
+    $("#canvas-"+active_canvas).clearCanvas();
+    fillWhite(active_canvas);
+  });
 
 });

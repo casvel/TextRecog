@@ -47,7 +47,7 @@ $(document).ready(function()
   }
 
   //Draws selection rectangle for segmentation
-  function draw()
+  function moveSelection()
   {
     var ctx_canvasSel = canvasSel.getContext("2d");   
     var ctx_canvasRes = canvasRes.getContext("2d");        
@@ -88,7 +88,7 @@ $(document).ready(function()
       return;
     }
 
-    draw();  
+    moveSelection();  
   });
 
   /*  
@@ -124,7 +124,7 @@ $(document).ready(function()
     }
   });
 
-  $("#clearBtn").click(function()
+  $("#clearSegBtn").click(function()
   {
     if ($(this).attr("disabled") === "disabled")
       return;
@@ -140,13 +140,13 @@ $(document).ready(function()
 
 
     $(this).attr( "disabled", true );
-    $("#clearBtn").attr( "disabled", true );
+    $("#clearSegBtn").attr( "disabled", true );
     $('.decSegBtn').attr( "disabled", false );
     var position = $("#canvasSeg").position();
     $("#canvasSel").css({position:"absolute", top:position.top, left:position.left});
     $("#canvasSel").show();
 
-    draw(); 
+    moveSelection(); 
   });
 
 });
