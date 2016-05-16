@@ -21,7 +21,7 @@ $(document).ready(function()
 
 	$("#tLetter").html(String.fromCharCode(letters[0]));
 	$('#pag_letters').bootpag({
-	  total: 52,
+	  total: 26,
 	  maxVisible: 13,
 	  leaps: false,
 	  firstLastUse: true
