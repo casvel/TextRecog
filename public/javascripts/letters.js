@@ -47,7 +47,10 @@ $(document).ready(function()
 		}).done(function(res)
 		{			
 			if (res == "Success")
+			{
 				$('#success-alert').show().delay(1500).fadeOut();
+				$("li.next").trigger("click");
+			}
 			else
 				$('#fail-alert').show().delay(1500).fadeOut();
 		});
