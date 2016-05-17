@@ -9,7 +9,7 @@ $(document).ready(function()
   var rectOffset = 0;
   var lineColor = '#333';
   var lineWidthVal = 4;
-  var wordNum = Math.floor((Math.random() * 20) + 0);
+  var wordNum = Math.floor(Math.random() * 20);
 
 
   var isMouseDown = false;
@@ -22,7 +22,7 @@ $(document).ready(function()
     x: 0,
     y: 0
   };
-  var words = ['house', 'life',
+  var words = ['house', 'alive',
     'girl', 'world',
     'dance', 'secret',
     'star', 'sailor',
