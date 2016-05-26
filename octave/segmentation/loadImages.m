@@ -3,7 +3,9 @@ function X = loadImages(path)
     images = dir([path "*.png"]);
     for i = 1:length(images)
         img = imread([path images(i).name]);
-        img_gray = ind2gray(rgb2ind(img), colormap("default"));
-        X = [X; img_gray(:)'];
+        #img = ind2gray(rgb2ind(img), colormap(gray));
+        X = [X; img(:)'];
     end
+    
+    X = double(X);
 end
