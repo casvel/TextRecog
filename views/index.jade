@@ -4,9 +4,9 @@ block head
 	script.
 		var active_canvas = 0;
 	script(src='/javascripts/jcanvas.min.js')
-	script(src='/javascripts/canvas-letters.js')
-	script(src='/javascripts/canvas-segmentation.js')
+	script(src='/javascripts/segmentation.js')
 	script(src='/javascripts/letters.js')
+	script(src='/javascripts/test.js')
 
 block content
 	nav(class="navbar navbar-default navbar-fixed-top")
@@ -75,8 +75,8 @@ block content
 					.row
 						h2#tText The quick brown fox 
 					.row
-						canvas(id="canvasSeg" width="300" height="100" style="z-index:0;")
-						canvas(id="canvasSel" width="300" height="100" name="seg" style="z-index:1; display:none")
+						canvas(id="canvasSeg" name="seg" width="300" height="100" style="z-index:0;")
+						canvas(id="canvasSel" width="300" height="100" style="z-index:1; display:none")
 					.row
 						canvas(id="canvasRes" width="50" height="100")
 					.row
@@ -88,3 +88,8 @@ block content
 							a(id="yesSegBtn" href="#seg" class="btn btn-primary decSegBtn" disabled) Yes
 							a(id="noSegBtn" href="#seg" class="btn btn-primary decSegBtn" disabled) No
 				div(class="tabe-pane fade" id="test")
+					.row
+						canvas(id="canvasTest" name="test" width="300" height="100")
+						p(class="bs-component")
+							a(id="clearTestBtn" class="btn btn-default") Clear
+							a(id="recogBtn" class="btn btn-primary") Recognize

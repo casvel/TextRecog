@@ -48,8 +48,6 @@ router.route('/letter/:id')
 	});
 });
 
-module.exports = router;
-
 router.route('/segmentation/:id')
 
 .all(function(req, res, next) 
@@ -78,3 +76,5 @@ router.route('/segmentation/:id')
 		});
 	});
 });
+
+module.exports = router;

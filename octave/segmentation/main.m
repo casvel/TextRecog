@@ -1,7 +1,7 @@
 function main
     
     % Uncomment if data.mat is not saved.
-    initData;
+    %initData;
     
     load data.mat;
     randInd = randperm(size(X, 1));
@@ -38,7 +38,7 @@ function main
         
     pred = predict(Theta1, Theta2, X);
     
-    save params.mat Theta1 Theta2;
+    %save params.mat Theta1 Theta2;
     
     fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);
     fprintf('Pred Yes: %d\n', sum(pred == 2));

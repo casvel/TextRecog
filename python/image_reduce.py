@@ -1,7 +1,6 @@
 # Script to reduce images size.
 
 from PIL import Image
-import numpy as np
 import os
 
 def reduce_images(path, h, w):

@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var saveRouter = require("./routes/save");
+var predictRouter = require("./routes/predict");
 
 var app = express();
 
@@ -22,8 +23,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+app.use("/", routes);
 app.use("/save", saveRouter);
+app.use("/predict", predictRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -75,37 +75,6 @@ $(document).ready(function()
     rectOffset += 10;
   }
 
-  $('.decSegBtn').click(function()
-  {
-    if ($(this).attr("disabled") === "disabled")
-      return;
- 
-    var dataURL = canvasRes.toDataURL();  
-    var id = this.id;    
-
-    $.ajax(
-    {
-      type: "POST",
-      url: "/save/segmentation/" + (id.match("^yes") ? "yes" : "no"),                              
-      data: { image: dataURL }
-    }).done(function(res)
-    {     
-      if (res == "Success")
-        $('#success-alert').show().delay(1500).fadeOut();
-      else
-        $('#fail-alert').show().delay(1500).fadeOut();
-    });
-
-    if (rectOffset + canvasRes.width > canvasSeg.width)
-    {
-      $('.decSegBtn').attr( "disabled", true );
-      $('#finish-alert').show().delay(1500).fadeOut();
-      return;
-    }
-
-    moveSelection();  
-  });
-
   /*  
   ** PAINTING FUNCTIONALITY **
   */
@@ -137,6 +106,37 @@ $(document).ready(function()
     {
       paintLine($(this), lastPos.x, lastPos.y, pos.x, pos.y, lineWidthVal, lineColor);
     }
+  });
+
+  $('.decSegBtn').click(function()
+  {
+    if ($(this).attr("disabled") === "disabled")
+      return;
+ 
+    var dataURL = canvasRes.toDataURL();  
+    var id = this.id;    
+
+    $.ajax(
+    {
+      type: "POST",
+      url: "/save/segmentation/" + (id.match("^yes") ? "yes" : "no"),                              
+      data: { image: dataURL }
+    }).done(function(res)
+    {     
+      if (res == "Success")
+        $('#success-alert').show().delay(1500).fadeOut();
+      else
+        $('#fail-alert').show().delay(1500).fadeOut();
+    });
+
+    if (rectOffset + canvasRes.width > canvasSeg.width)
+    {
+      $('.decSegBtn').attr( "disabled", true );
+      $('#finish-alert').show().delay(1500).fadeOut();
+      return;
+    }
+
+    moveSelection();  
   });
 
   $("#clearSegBtn").click(function()
