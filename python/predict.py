@@ -11,13 +11,13 @@ def get_rect(img, box):
 	return img_rect
 
 def segmentation():
-	routeText  = os.path.normcase("../data/test/text.png")
-	routeRect  = os.path.normcase("../data/test/rect.png")
-	pathLetter = os.path.normcase("../data/test/")
+	routeText  = os.path.normcase("data/test/text.png")
+	routeRect  = os.path.normcase("data/test/rect.png")
+	pathLetter = os.path.normcase("data/test/")
 
 	img = Image.open(routeText).convert("L")
 
-	octave.cd("../octave/segmentation")
+	octave.cd("octave/segmentation")
 
 	w, h    = img.size
 	lastx   = 0
