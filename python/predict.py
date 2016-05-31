@@ -29,7 +29,7 @@ def segmentation():
 		pred = octave.getPrediction()
 		#print (pred)
 		#input("Enter to continue")
-		if pred == 2 and delta-lastx >= 20:
+		if pred == 2 and delta-lastx >= 10:
 			img_letter = get_rect(img, (lastx, 0, delta+25, h))
 			img_letter.save(os.path.join(pathLetter, str(letters)+".png"))
 			lastx = delta+25
