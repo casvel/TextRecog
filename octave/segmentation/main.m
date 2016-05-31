@@ -1,7 +1,7 @@
-function main
+function [Theta1, Theta2] = main
     
     % Uncomment if data.mat is not saved.
-    %initData;
+    initData;
     
     load data.mat;
     randInd = randperm(size(X, 1));
@@ -19,7 +19,7 @@ function main
     
     % parameters for the fmincg function.
     options = optimset('MaxIter', 200);
-    lambda = 0.3;                    % just guessing.
+    lambda = 0.1;                    % just guessing.
     costFunction = @(p) nnCostFunction(p, ...
                                    input_layer_size, ...
                                    hidden_layer_size, ...

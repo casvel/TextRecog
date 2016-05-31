@@ -31,7 +31,7 @@ router.route('/letter/:id')
 {
 	var base64Data = new Buffer(req.body.image.replace(/^data:image\/(png|gif|jpeg);base64,/,''), "base64");
 	var randomId = guid();
-	var folder = path.resolve(`./data/letters/${req.params.id}`);
+	var folder = path.resolve(`./data/letters/full/${req.params.id}`);
 
 	fs.exists(folder, function(exists)
 	{
@@ -60,7 +60,7 @@ router.route('/segmentation/:id')
 {
 	var base64Data = new Buffer(req.body.image.replace(/^data:image\/(png|gif|jpeg);base64,/,''), "base64");
 	var randomId = guid();
-	var folder = path.resolve(`./data/segmentation/${req.params.id}`);
+	var folder = path.resolve(`./data/segmentation/full/${req.params.id}`);
 
 	fs.exists(folder, function(exists)
 	{

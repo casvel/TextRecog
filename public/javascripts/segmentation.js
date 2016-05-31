@@ -35,7 +35,7 @@ $(document).ready(function()
   ]
   
   word.innerHTML = words[wordNum];
-  fillWhite(canvasSeg);
+  initCanvas()
 
   /* To fill the canvas with white */
   function fillWhite(canvas)
@@ -69,50 +69,52 @@ $(document).ready(function()
     
     ctx_canvasSel.clearRect(0, 0, canvasSel.width, canvasSel.height);
     ctx_canvasSel.fillStyle = "rgba(0, 255, 0, 0.2)";
-    ctx_canvasSel.fillRect(rectOffset, 0, canvasRes.width, canvasRes.height); 
+    ctx_canvasSel.fillRect(rectOffset, 0, canvasRes.width, canvasRes.height);
 
     ctx_canvasRes.drawImage(canvasSeg, rectOffset, 0, canvasRes.width, canvasRes.height, 0, 0, canvasRes.width, canvasRes.height);
+
     rectOffset += 10;
   }
 
-  /*  
-  ** PAINTING FUNCTIONALITY **
-  */
-  
-  //On mousedown the painting functionality kicks in
-  canvas.on('mousedown', function(e) 
+  function initCanvas()
   {
-    isMouseDown = true;
-  });
+    fillWhite(canvasSeg);
 
-  //On mouseup the painting functionality stops
-  canvas.on('mouseup', function() 
-  {
-    isMouseDown = false;
-    return;
-  });
-
-  //On mousemove store the mouse coordinates and 
-  //use jCanvas drawLine() method
-  canvas.on('mousemove', function(e) 
-  {
-
-    lastPos.x = pos.x;
-    lastPos.y = pos.y;
-    pos.x = e.pageX - $(this).offset().left;
-    pos.y = e.pageY - $(this).offset().top;
-
-    if (isMouseDown) 
+    //On mousedown the painting functionality kicks in
+    canvas.on('mousedown', function(e) 
     {
-      paintLine($(this), lastPos.x, lastPos.y, pos.x, pos.y, lineWidthVal, lineColor);
-    }
-  });
+      isMouseDown = true;
+    });
+
+    //On mouseup the painting functionality stops
+    canvas.on('mouseup', function() 
+    {
+      isMouseDown = false;
+      return;
+    });
+
+    //On mousemove store the mouse coordinates and 
+    //use jCanvas drawLine() method
+    canvas.on('mousemove', function(e) 
+    {
+
+      lastPos.x = pos.x;
+      lastPos.y = pos.y;
+      pos.x = e.pageX - $(this).offset().left;
+      pos.y = e.pageY - $(this).offset().top;
+
+      if (isMouseDown) 
+      {
+        paintLine($(this), lastPos.x, lastPos.y, pos.x, pos.y, lineWidthVal, lineColor);
+      }
+    });
+  }
 
   $('.decSegBtn').click(function()
   {
     if ($(this).attr("disabled") === "disabled")
       return;
- 
+
     var dataURL = canvasRes.toDataURL();  
     var id = this.id;    
 
@@ -157,9 +159,15 @@ $(document).ready(function()
     $(this).attr( "disabled", true );
     $("#clearSegBtn").attr( "disabled", true );
     $('.decSegBtn').attr( "disabled", false );
+    
     var position = $("#canvasSeg").position();
     $("#canvasSel").css({position:"absolute", top:position.top, left:position.left});
     $("#canvasSel").show();
+
+    var position = $("#canvasRes").position();
+    $("#canvasResLine").css({position:"absolute", top:position.top, left:position.left});
+    paintLine($("#canvasResLine"), 25, 0, 25, canvasSel.height, 2, "#F85656");
+    $("#canvasResLine").show();
 
     moveSelection(); 
   });
