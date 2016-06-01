@@ -8,8 +8,7 @@ $(document).ready(function()
 
   var rectOffset = 0;
   var lineColor = '#333';
-  var lineWidthVal = 4;
-  var wordNum = Math.floor(Math.random() * 20);
+  var lineWidthVal = 7;
 
 
   var isMouseDown = false;
@@ -22,18 +21,19 @@ $(document).ready(function()
     x: 0,
     y: 0
   };
-  var words = ['house', 'alive',
-    'girl', 'world',
-    'dance', 'secret',
-    'star', 'sailor',
-    'real', 'free',
-    'drive', 'music',
-    'moon', 'hello',
-    'light', 'birds',
-    'beach', 'muse',
-    'ocean', 'sunny'
+  var words = ['house', 'alive', "candy", "never", "bikini",
+    'girl', 'world', "beast", "daily", "bride",
+    'dance', 'secret', "diner", "divide", "brain",
+    'star', 'sailor', "zebra", "delight", "pain",
+    'real', 'free', "down", "doctor", "petal",
+    'drive', 'music', "main", "dummy", "piano",
+    'moon', 'hello', "sound", "dwarf", "phone",
+    'light', 'birds', "little", "dyke", "pulse",
+    'beach', 'muse', "drunk", "baby", "taco",
+    'ocean', 'sunny', "write", "beige", "tailor"
   ]
   
+  var wordNum = Math.floor(Math.random() * words.length);
   word.innerHTML = words[wordNum];
   initCanvas()
 

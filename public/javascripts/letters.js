@@ -2,7 +2,7 @@ $(document).ready(function()
 {
 
 	var lineColor = '#333';
-  var lineWidthVal = 4;
+  var lineWidthVal = 7;
 
   var isMouseDown = false;
 

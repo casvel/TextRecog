@@ -17,6 +17,7 @@ def reduce_images(path, dest, h, w):
 
 path_seg = "../data/segmentation/full"
 dest_seg = "../data/segmentation"
+
 path_ltr = "../data/letters/full"
 dest_ltr = "../data/letters"
 
