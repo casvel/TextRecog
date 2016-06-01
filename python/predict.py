@@ -4,8 +4,8 @@ from oct2py import octave
 from PIL import Image
 import os
 
-data_folder   = "data/test/"
-octave_folder = "octave/segmentation"
+data_folder   = "../data/test/"
+octave_folder = "../octave/segmentation"
 
 routeText = os.path.join(data_folder, "text.png")
 img_text  = Image.open(routeText).convert("L")
@@ -28,11 +28,12 @@ def preprocess_img():
 	end   = get_col(img, [w-1, h-1], [-1, -1], [-1, -1])
 
 	flag = True
-	while (end-start) % 10 != 0:
+	while (end-start) % 50 != 0:
 		if (flag or end == w-1) and start > 0:
 			start -= 1
 		else:
 			end += 1
+		flag = not flag
 
 	img_text = img_text.crop((start, 0, end, h))
 
@@ -67,5 +68,6 @@ def segmentation():
 
 octave.cd(octave_folder)
 preprocess_img()
+#print (img_text.size)
 #img_text.show()
 segmentation()

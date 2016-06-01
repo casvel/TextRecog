@@ -10,7 +10,7 @@ function [Theta1, Theta2] = main
     %displayData(X(1:100, :));
     
     input_layer_size = size(X, 2); % num. pixels.
-    hidden_layer_size = 200;         % just guessing.
+    hidden_layer_size = 250;         % just guessing.
     num_labels = 2;                % yes/no. 
     
     initial_Theta1 = randInitializeWeights(input_layer_size, hidden_layer_size);
