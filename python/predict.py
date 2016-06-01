@@ -4,8 +4,8 @@ from oct2py import octave
 from PIL import Image
 import os
 
-data_folder   = "../data/test/"
-octave_folder = "../octave/segmentation"
+data_folder   = "data/test/"
+octave_folder = "octave/segmentation"
 
 routeText = os.path.join(data_folder, "text.png")
 img_text  = Image.open(routeText).convert("L")
