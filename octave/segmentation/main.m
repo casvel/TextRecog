@@ -10,7 +10,7 @@ function [Theta1, Theta2] = main
     %displayData(X(1:100, :));
     
     input_layer_size = size(X, 2); % num. pixels.
-    hidden_layer_size = 250;         % just guessing.
+    hidden_layer_size = 150;         % just guessing.
     num_labels = 2;                % yes/no. 
     
     initial_Theta1 = randInitializeWeights(input_layer_size, hidden_layer_size);
@@ -19,7 +19,7 @@ function [Theta1, Theta2] = main
     
     % parameters for the fmincg function.
     options = optimset('MaxIter', 200);
-    lambda = 0.1;                    % just guessing.
+    lambda = 0.3;                    % just guessing.
     costFunction = @(p) nnCostFunction(p, ...
                                    input_layer_size, ...
                                    hidden_layer_size, ...

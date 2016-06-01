@@ -20,8 +20,8 @@ dest_seg = "../data/segmentation"
 path_ltr = "../data/letters/full"
 dest_ltr = "../data/letters"
 
-reduce_images(path_seg+"/yes", dest_seg+"/yes", 20, 20)
-reduce_images(path_seg+"/no", dest_seg+"/no", 20, 20)
+reduce_images(path_seg+"/yes", dest_seg+"/yes", 10, 20)
+reduce_images(path_seg+"/no", dest_seg+"/no", 10, 20)
 
 for i in range(ord('a'), ord('z')+1):
 	reduce_images(path_ltr+"/"+chr(i), dest_ltr+"/"+chr(i), 20, 20)
