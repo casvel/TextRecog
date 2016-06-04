@@ -4,9 +4,9 @@ import os
 path_yes = "../data/segmentation/yes"
 path_no  = "../data/segmentation/no"
 
-def is_bad_yes(img, pixels):
-	w, h = img.size
-	img  = img.load()
+def is_bad_yes(image, pixels):
+	w, h = image.size
+	img  = image.load()
 	black = 0
 	for i in range(h):
 		if img[w/2-1, i] != 255:
@@ -17,20 +17,26 @@ def is_bad_yes(img, pixels):
 
 	return False
 
-def is_bad_no(img, cols):
-	w, h = img.size
-	img  = img.load()
+def is_bad_no(image, cols):
+	w, h = image.size
+	img  = image.load()
+
+	#image.show()
 
 	left  = False
 	right = False
 	for j in range(cols):
 		for i in range(h):
-			if img[j, i] != 255: 
+			if img[j, i] <= 250: 
 				left = True
-			if img[w-j-1, i] != 255:
+			if img[w-j-1, i] <= 250:
 				right = True
 
-	return not left or not right
+	#print([img[0, i] for i in range(h)])
+	#print(left, right)
+	#input()
+
+	return not left or not right or not is_bad_yes(image, 5)
 
 images = os.listdir(path_yes)
 for name in images:
