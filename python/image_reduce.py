@@ -10,7 +10,7 @@ def reduce_images(path, dest, h, w):
 		route = os.path.join(path, name)
 		img = Image.open(route).convert("L")
 		#img.show()
-		img_reduce = img.resize((h, w), Image.ANTIALIAS)
+		img_reduce = img.resize((w, h), Image.ANTIALIAS)
 
 		route_dest = os.path.join(dest, name)
 		img_reduce.save(route_dest)
@@ -21,8 +21,8 @@ dest_seg = "../data/segmentation"
 path_ltr = "../data/letters/full"
 dest_ltr = "../data/letters"
 
-reduce_images(path_seg+"/yes", dest_seg+"/yes", 10, 20)
-reduce_images(path_seg+"/no", dest_seg+"/no", 10, 20)
+reduce_images(path_seg+"/yes", dest_seg+"/yes", 20, 10)
+reduce_images(path_seg+"/no", dest_seg+"/no", 20, 10)
 
 for i in range(ord('a'), ord('z')+1):
 	reduce_images(path_ltr+"/"+chr(i), dest_ltr+"/"+chr(i), 20, 20)
