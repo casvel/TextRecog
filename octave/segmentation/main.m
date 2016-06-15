@@ -18,7 +18,7 @@ function [Theta1, Theta2] = main
     initial_nn_params = [initial_Theta1(:) ; initial_Theta2(:)];
     
     % parameters for the fmincg function.
-    options = optimset('MaxIter', 200);
+    options = optimset('MaxIter', 250);
     lambda = 0.3;                    % just guessing.
     costFunction = @(p) nnCostFunction(p, ...
                                    input_layer_size, ...
